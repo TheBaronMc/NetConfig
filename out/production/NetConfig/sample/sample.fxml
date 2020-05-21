@@ -13,35 +13,37 @@
       </Label>
       <AnchorPane prefHeight="59.0" prefWidth="423.0">
          <children>
-            <RadioButton layoutX="292.0" layoutY="21.0" mnemonicParsing="false" text="Binaire">
+            <RadioButton fx:id="modeBin" layoutX="292.0" layoutY="21.0" mnemonicParsing="false" onAction="#calculConfig" text="Binaire">
                <toggleGroup>
                   <ToggleGroup fx:id="affichage" />
                </toggleGroup></RadioButton>
-            <RadioButton layoutX="168.0" layoutY="21.0" mnemonicParsing="false" selected="true" text="Décimale" toggleGroup="$affichage" />
-            <RadioButton layoutX="26.0" layoutY="21.0" mnemonicParsing="false" text="Hexadécimale" toggleGroup="$affichage" />
+            <RadioButton fx:id="modeDec" layoutX="168.0" layoutY="21.0" mnemonicParsing="false" onAction="#modeSelected" selected="true" text="Décimale" toggleGroup="$affichage" />
+            <RadioButton fx:id="modeHex" layoutX="26.0" layoutY="21.0" mnemonicParsing="false" onAction="#modeSelected" text="Hexadécimale" toggleGroup="$affichage" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="328.0" prefWidth="423.0">
          <children>
-            <TextField layoutX="153.0" layoutY="34.0" prefHeight="26.0" prefWidth="236.0" />
-            <TextField layoutX="153.0" layoutY="73.0" prefHeight="26.0" prefWidth="236.0" />
-            <TextField layoutX="153.0" layoutY="112.0" prefHeight="26.0" prefWidth="236.0" />
-            <TextField layoutX="153.0" layoutY="176.0" prefHeight="26.0" prefWidth="236.0" />
-            <TextField layoutX="153.0" layoutY="215.0" prefHeight="26.0" prefWidth="236.0" />
-            <TextField layoutX="272.0" layoutY="276.0" prefHeight="26.0" prefWidth="117.0" />
-            <Label layoutX="57.0" layoutY="39.0" text="Adresse :" />
-            <Label layoutX="57.0" layoutY="78.0" text="Masque :" />
-            <Label layoutX="57.0" layoutY="117.0" text="Passerelle :" />
-            <Label layoutX="57.0" layoutY="181.0" text="Plus haute :" />
-            <Label layoutX="57.0" layoutY="220.0" text="Plus basse :" />
-            <Label layoutX="57.0" layoutY="281.0" text="Nombre d'adresse disponible :" />
+            <TextField fx:id="adresse" layoutX="153.0" layoutY="21.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField fx:id="masque" layoutX="153.0" layoutY="60.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField fx:id="passerelle" layoutX="153.0" layoutY="99.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField fx:id="plsHaute" layoutX="153.0" layoutY="195.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField fx:id="plsBasse" layoutX="153.0" layoutY="234.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField fx:id="nbDispo" layoutX="271.0" layoutY="289.0" prefHeight="26.0" prefWidth="117.0" />
+            <Label layoutX="55.0" layoutY="26.0" text="Adresse :" />
+            <Label layoutX="55.0" layoutY="65.0" text="Masque :" />
+            <Label layoutX="55.0" layoutY="104.0" text="Passerelle :" />
+            <Label layoutX="55.0" layoutY="202.0" text="Plus haute :" />
+            <Label layoutX="55.0" layoutY="241.0" text="Plus basse :" />
+            <Label layoutX="55.0" layoutY="294.0" text="Nombre d'adresse disponible :" />
+            <TextField fx:id="reseau" layoutX="154.0" layoutY="157.0" prefHeight="26.0" prefWidth="236.0" />
+            <Label layoutX="55.0" layoutY="156.0" text="Réseau :" />
 
          </children></AnchorPane>
       <AnchorPane prefHeight="57.0" prefWidth="423.0">
          <children>
             <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#stop" text="Quitter" />
-            <Button layoutX="332.0" layoutY="14.0" mnemonicParsing="false" text="Valider" />
-            <Button layoutX="137.0" layoutY="14.0" mnemonicParsing="false" text="Ma configuration réseau" />
+            <Button layoutX="332.0" layoutY="14.0" mnemonicParsing="false" onAction="#calculConfig" text="Valider" />
+            <Button layoutX="137.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchConfig" text="Ma configuration réseau" />
          </children>
       </AnchorPane>
       
