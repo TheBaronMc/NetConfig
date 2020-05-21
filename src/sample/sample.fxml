@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Label alignment="CENTER" prefHeight="48.0" prefWidth="429.0" text="NetConfig" textAlignment="CENTER">
+         <font>
+            <Font name="DejaVu Sans Bold" size="27.0" />
+         </font>
+      </Label>
+      <AnchorPane prefHeight="59.0" prefWidth="423.0">
+         <children>
+            <RadioButton layoutX="292.0" layoutY="21.0" mnemonicParsing="false" text="Binaire">
+               <toggleGroup>
+                  <ToggleGroup fx:id="affichage" />
+               </toggleGroup></RadioButton>
+            <RadioButton layoutX="168.0" layoutY="21.0" mnemonicParsing="false" selected="true" text="Décimale" toggleGroup="$affichage" />
+            <RadioButton layoutX="26.0" layoutY="21.0" mnemonicParsing="false" text="Hexadécimale" toggleGroup="$affichage" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="328.0" prefWidth="423.0">
+         <children>
+            <TextField layoutX="153.0" layoutY="34.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField layoutX="153.0" layoutY="73.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField layoutX="153.0" layoutY="112.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField layoutX="153.0" layoutY="176.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField layoutX="153.0" layoutY="215.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField layoutX="272.0" layoutY="276.0" prefHeight="26.0" prefWidth="117.0" />
+            <Label layoutX="57.0" layoutY="39.0" text="Adresse :" />
+            <Label layoutX="57.0" layoutY="78.0" text="Masque :" />
+            <Label layoutX="57.0" layoutY="117.0" text="Passerelle :" />
+            <Label layoutX="57.0" layoutY="181.0" text="Plus haute :" />
+            <Label layoutX="57.0" layoutY="220.0" text="Plus basse :" />
+            <Label layoutX="57.0" layoutY="281.0" text="Nombre d'adresse disponible :" />
+
+         </children></AnchorPane>
+      <AnchorPane prefHeight="57.0" prefWidth="423.0">
+         <children>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#stop" text="Quitter" />
+            <Button layoutX="332.0" layoutY="14.0" mnemonicParsing="false" text="Valider" />
+            <Button layoutX="137.0" layoutY="14.0" mnemonicParsing="false" text="Ma configuration réseau" />
+         </children>
+      </AnchorPane>
+      
+   </children>
+</VBox>
