@@ -7,7 +7,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import javax.sound.midi.Soundbank;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller {
@@ -31,6 +33,9 @@ public class Controller {
     public TextField higher;
     public TextField lower;
     public TextField naa;
+
+    // Will store errors
+    public ArrayList<String> errors;
 
 
     public void initialize() {
@@ -66,32 +71,107 @@ public class Controller {
         this.oldMode = this.currentMode;
         this.currentMode = this.getSelectedMode();
 
-        if (!this.fieldsEmpty()) {
-            System.out.println("NON-VIDE");
+        ArrayList<TextField> noEmptyFields = this.fieldsEmpty();
+        if (!noEmptyFields.isEmpty()) {
+            convertIntoNewMode(noEmptyFields, this.currentMode, this.oldMode);
         }
-
-        System.out.println("VIDE");
     }
 
-    private boolean fieldsEmpty() {
-        TextField[] fields = {this.address, this.mask, this.broadcast, this.network, this.lower, this.higher};
-
-        for (int i = 0; i < fields.length; i++) {
-            CharSequence content = fields[i].getCharacters();
-            System.out.println("content: " + content);
-            /*
-            if (content.) {
-                //String content = (String) fields[i].getCharacters();
-                System.out.println(fields[i].getId() + " : " );
-                //if (!content.equals("")) {
-                //    return false;
-                //}
+    public void convertIntoNewMode(ArrayList<TextField> noEmptyFields, String currentMode, String oldMode) {
+        /**
+         * Convert an address into the current mode
+         */
+        this.errors = new ArrayList<String>();
+        for (TextField field:
+             noEmptyFields) {
+            String address = field.getCharacters().toString();
+            if (checkAddress(address, oldMode)) {
+                System.out.println("Good address");
+            } else {
+                errors.add(field.getId());
+                errors.add("Not valable address");
             }
-
-             */
         }
-        
-        return true;
+    }
+
+    private boolean checkAddress(String address, String mode) {
+        /**
+         * Check the address format
+         * !!! No mater if it is a mask or not !!!
+         */
+        if (mode.equals("HEX")) {
+            try {
+                String[] splitAddress = address.split(":");
+                if (splitAddress.length != 4) { return false; }
+                for (String bte: splitAddress) {
+                    try {
+                        if (!(0 <= Integer.parseInt(bte, 16) && Integer.parseInt(bte, 16) <= 255)) {
+                            return false;
+                        }
+                    } catch (Exception e) {
+                        return false;
+                    }
+                }
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        } else {
+            if (mode.equals("BIN")) {
+                try {
+                    String[] splitAddress = address.split("\\.");
+                    if (splitAddress.length != 4) { return false; }
+                    for (String bte: splitAddress) {
+                        try {
+                            if (!(0 <= Integer.parseInt(bte, 2) && Integer.parseInt(bte, 2) <= 255)) {
+                                return false;
+                            }
+                        } catch (Exception e) {
+                            return false;
+                        }
+                    }
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            } else if (mode.equals("DEC")) {
+                try {
+                    String[] splitAddress = address.split("\\.");
+                    if (splitAddress.length != 4) { return false; }
+                    for (String bte: splitAddress) {
+                        try {
+                            if (!(0 <= Integer.parseInt(bte) && Integer.parseInt(bte) <= 255)) {
+                                return false;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+                    }
+                    return true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            } else {
+                throw new IllegalArgumentException("WRONG MODE");
+            }
+        }
+    }
+
+    public ArrayList<TextField> fieldsEmpty() {
+        /**
+         * Check if fields are empty. If it is not place the field into a arraylist.
+         */
+        TextField[] fields = {this.address, this.mask, this.broadcast, this.network, this.lower, this.higher};
+        ArrayList<TextField> textFieldArrayList = new ArrayList<TextField>();
+        for (TextField field: fields) {
+            CharSequence content = field.getCharacters();
+            if (content.length() != 0) {
+                textFieldArrayList.add(field);
+            }
+        }
+        return textFieldArrayList;
     }
 
     public String getSelectedMode() {
