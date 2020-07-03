@@ -59,7 +59,29 @@ public class Controller {
     }
 
     public void calculConfig(ActionEvent event) {
-        warnMessage("Cette option n'est pas encore disponible", Alert.AlertType.ERROR);
+        CharSequence address = this.address.getCharacters();
+        CharSequence mask = this.mask.getCharacters();
+        String strAddress;
+        String strMask;
+
+        if ((address.length() ==0 ) || (mask.length() == 0)) {
+            System.out.println("Mask and Address length problem");
+            return;
+        }
+
+        strAddress = address.toString();
+        strMask = mask.toString();
+
+        if (checkAddress(strAddress, this.currentMode) && checkMask(strMask, this.currentMode)) {
+            NetConfig netConfig = new NetConfig(strAddress, strMask);
+            broadcast.setText(netConfig.getBroadcast());
+            network.setText(netConfig.getNetwork());
+            higher.setText(netConfig.getHigher());
+            lower.setText(netConfig.getLower());
+        } else {
+            System.out.println("Mask and Address dosen't pass the check");
+            return;
+        }
     }
 
     public void modeSelected(ActionEvent event) {
