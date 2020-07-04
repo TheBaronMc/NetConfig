@@ -10,7 +10,7 @@ public class NetConfig {
     private String network;
     private String lower;
     private String higher;
-    private int nbAvailable;
+    private double nbAvailable;
 
 
     NetConfig(String address, String mask) {
@@ -25,6 +25,8 @@ public class NetConfig {
 
         this.lower = calculLower(this.network);
         this.higher = calculHigher(this.broadcast);
+
+        this.nbAvailable = calculAvailable(this.mask);
     }
 
     NetConfig(String address, int mask) {
@@ -132,6 +134,20 @@ public class NetConfig {
         return binAddressArray;
     }
 
+    private double calculAvailable(String mask) {
+        String[] binMask = convertIntoBinary(mask);
+        int count = 0;
+        for (String bte: binMask ) {
+            char[] bteArray = bte.toCharArray();
+            for (char bit: bteArray) {
+                if (bit == '0') {
+                    count++;
+                }
+            }
+        }
+        return Math.pow(2,count);
+    }
+
     public String getBroadcast() {
         return this.broadcast;
     }
@@ -148,7 +164,7 @@ public class NetConfig {
         return this.higher;
     }
 
-    public int getNbAvailable() {
+    public double getNbAvailable() {
         return this.nbAvailable;
     }
 }

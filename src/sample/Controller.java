@@ -63,6 +63,7 @@ public class Controller {
         CharSequence mask = this.mask.getCharacters();
         String strAddress;
         String strMask;
+        NetConfig netConfig;
 
         if ((address.length() ==0 ) || (mask.length() == 0)) {
             System.out.println("Mask and Address length problem");
@@ -73,15 +74,24 @@ public class Controller {
         strMask = mask.toString();
 
         if (checkAddress(strAddress, this.currentMode) && checkMask(strMask, this.currentMode)) {
-            NetConfig netConfig = new NetConfig(strAddress, strMask);
-            broadcast.setText(netConfig.getBroadcast());
-            network.setText(netConfig.getNetwork());
-            higher.setText(netConfig.getHigher());
-            lower.setText(netConfig.getLower());
+            if (this.currentMode.equals("DEC")) {
+                netConfig = new NetConfig(strAddress, strMask);
+                broadcast.setText(netConfig.getBroadcast());
+                network.setText(netConfig.getNetwork());
+                higher.setText(netConfig.getHigher());
+                lower.setText(netConfig.getLower());
+            } else {
+                netConfig = new NetConfig(convert(strAddress, 10, modeStringToInt(this.currentMode)), convert(strMask, 10, modeStringToInt(this.currentMode)));
+                broadcast.setText(convert(netConfig.getBroadcast(), modeStringToInt(this.currentMode),10 ));
+                network.setText(convert(netConfig.getNetwork(), modeStringToInt(this.currentMode), 10));
+                higher.setText(convert(netConfig.getHigher(), modeStringToInt(this.currentMode), 10));
+                lower.setText(convert(netConfig.getLower(), modeStringToInt(this.currentMode), 10));
+            }
         } else {
             System.out.println("Mask and Address dosen't pass the check");
             return;
         }
+        this.naa.setText(Double.toString(netConfig.getNbAvailable()));
     }
 
     public void modeSelected(ActionEvent event) {
@@ -174,10 +184,8 @@ public class Controller {
 
         for (int i = 0; i < convertedAddressArray.length; i++) {
             if (currentMode != 16) {
-                System.out.println(convertedAddress);
-                convertedAddress = convertedAddress +convertedAddressArray[i] + ".";
+                convertedAddress = convertedAddress + convertedAddressArray[i] + ".";
             } else {
-                System.out.println(convertedAddress);
                 convertedAddress = convertedAddress + convertedAddressArray[i] + ":";
             }
         }
