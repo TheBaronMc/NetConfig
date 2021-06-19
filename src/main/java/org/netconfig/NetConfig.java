@@ -1,4 +1,4 @@
-package sample;
+package org.netconfig;
 
 public class NetConfig {
     // Base elements

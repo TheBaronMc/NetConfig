@@ -1,4 +1,4 @@
-package sample;
+package org.netconfig;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("NetConfig.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/NetConfig.fxml"));
         primaryStage.setTitle("NetConfig");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
