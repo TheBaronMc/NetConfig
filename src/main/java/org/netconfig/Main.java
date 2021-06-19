@@ -1,26 +1,7 @@
 package org.netconfig;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-
-public class Main extends Application {
-
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/NetConfig.fxml"));
-        primaryStage.setTitle("NetConfig");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        // primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.show();
-    }
-
-
+public class Main {
     public static void main(String[] args) {
-        launch(args);
+        App.main(args);
     }
 }
