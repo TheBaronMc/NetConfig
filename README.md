@@ -19,7 +19,7 @@ java -jar NetConfig-*.jar
 The next picture represents the main frame of the application.
 
 <p align="center">
-  <img alt="netconfig-screen" src="img/netconfig-screen.pn">
+  <img alt="netconfig-screen" src="img/netconfig-screen.png">
 </p>
 
 **Caption:**
