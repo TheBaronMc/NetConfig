@@ -46,5 +46,8 @@ If the ask for computation and there is a mistake in your data, nothing will hap
 
 If you change the base and there is a mistake in your data, a warning message will appear to tell you that the conversion hasn't been made.
 
-![](img/conversion_error.png)
+<p align="center">
+  <img alt="conversion_error" src="img/conversion_error.png">
+</p>
+
 
