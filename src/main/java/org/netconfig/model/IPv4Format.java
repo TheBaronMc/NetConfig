@@ -1,9 +1,13 @@
 package org.netconfig.model;
 
+import java.util.HashMap;
+
 public abstract class IPv4Format {
     public static final int BASE2 = 2; // BINARY
     public static final int BASE10 = 10; // DECIMAL
     public static final int BASE16 = 16; // HEXADECIMAL
+
+    protected UnsignedByte[] addr;
 
     /**
      * Get the regex according to the base
@@ -57,12 +61,24 @@ public abstract class IPv4Format {
      * @param base
      * @return
      */
-    public abstract String[] toArray(int base);
+    public String[] toArray(int base) {
+        checkBase(base);
+
+        UnsignedByte[] byteArray = this.addr;
+        String[] array = new String[byteArray.length];
+        for (int i=0; i<byteArray.length; i++) {
+            array[i] = byteArray[i].toString(base);
+        }
+
+        return array;
+    }
 
     /**
      * Get the string corresponding to the address in the given base
      * @param base
      * @return
      */
-    public abstract String toString(int base);
+    public String toString(int base) {
+        return String.join(String.valueOf(getSeparator(base)), toArray(base));
+    }
 }

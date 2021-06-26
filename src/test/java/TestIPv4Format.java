@@ -87,16 +87,6 @@ public class TestIPv4Format {
         public void checkBase(int base) {
             super.checkBase(base);
         }
-
-        @Override
-        public String[] toArray(int base) {
-            return new String[0];
-        }
-
-        @Override
-        public String toString(int base) {
-            return null;
-        }
     }
 }
 
