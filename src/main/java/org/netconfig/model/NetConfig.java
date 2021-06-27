@@ -14,7 +14,7 @@ public class NetConfig {
 
     private double available;
 
-    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private PropertyChangeSupport pcs;
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         this.pcs.addPropertyChangeListener(listener);
@@ -25,6 +25,7 @@ public class NetConfig {
     }
 
     public NetConfig() {
+        this.pcs = new PropertyChangeSupport(this);
         this.available = 0;
     }
 
