@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.netconfig.Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label alignment="CENTER" prefHeight="48.0" prefWidth="429.0" text="NetConfig" textAlignment="CENTER">
          <font>
@@ -14,19 +19,19 @@
       <AnchorPane prefHeight="59.0" prefWidth="423.0">
          <children>
             <Label layoutX="24.0" layoutY="21.0" text="Mode :" />
-            <RadioButton fx:id="hexMode" layoutX="103.0" layoutY="20.0" mnemonicParsing="false" text="HEX" onAction="#newMode">
+            <RadioButton fx:id="hexMode" layoutX="103.0" layoutY="20.0" mnemonicParsing="false" onAction="#newMode" text="HEX">
                <toggleGroup>
                   <ToggleGroup fx:id="RadioGroup" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="decMode" layoutX="211.0" layoutY="20.0" mnemonicParsing="false" selected="true" text="DEC" toggleGroup="$RadioGroup" onAction="#newMode" />
-            <RadioButton fx:id="binMode" layoutX="314.0" layoutY="20.0" mnemonicParsing="false" text="BIN" toggleGroup="$RadioGroup" onAction="#newMode" />
+            <RadioButton fx:id="decMode" layoutX="211.0" layoutY="20.0" mnemonicParsing="false" onAction="#newMode" selected="true" text="DEC" toggleGroup="$RadioGroup" />
+            <RadioButton fx:id="binMode" layoutX="314.0" layoutY="20.0" mnemonicParsing="false" onAction="#newMode" text="BIN" toggleGroup="$RadioGroup" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="328.0" prefWidth="423.0">
          <children>
-            <TextField fx:id="address" layoutX="153.0" layoutY="21.0" prefHeight="26.0" prefWidth="236.0" />
-            <TextField fx:id="mask" layoutX="153.0" layoutY="60.0" prefHeight="26.0" prefWidth="236.0" />
+            <TextField fx:id="address" layoutX="153.0" layoutY="21.0" onKeyTyped="#setAddress" prefHeight="26.0" prefWidth="236.0" />
+            <TextField fx:id="mask" layoutX="153.0" layoutY="60.0" onKeyTyped="#setMask" prefHeight="26.0" prefWidth="236.0" />
             <TextField fx:id="network" layoutX="153.0" layoutY="117.0" prefHeight="26.0" prefWidth="236.0" />
             <TextField fx:id="broadcast" layoutX="154.0" layoutY="156.0" prefHeight="26.0" prefWidth="236.0" />
             <TextField fx:id="higher" layoutX="153.0" layoutY="195.0" prefHeight="26.0" prefWidth="236.0" />
@@ -46,7 +51,7 @@
       <AnchorPane prefHeight="57.0" prefWidth="423.0">
          <children>
             <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#stop" text="Exit" />
-            <Button layoutX="332.0" layoutY="14.0" mnemonicParsing="false" onAction="#calculConfig" text="Enter" />
+            <Button layoutX="324.0" layoutY="14.0" mnemonicParsing="false" text="toJSON" />
          </children>
       </AnchorPane>
       
