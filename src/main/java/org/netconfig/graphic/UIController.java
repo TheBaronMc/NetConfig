@@ -23,11 +23,11 @@ public class UIController implements PropertyChangeListener {
 
     // Mode button
     @FXML
-    public RadioButton hexMode;
+    private RadioButton hexMode;
     @FXML
-    public RadioButton decMode;
+    private RadioButton decMode;
     @FXML
-    public RadioButton binMode;
+    private RadioButton binMode;
 
     // Fields
     @FXML
