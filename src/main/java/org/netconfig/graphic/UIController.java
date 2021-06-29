@@ -1,14 +1,23 @@
 package org.netconfig.graphic;
 
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.DirectoryChooser;
+import org.netconfig.App;
 import org.netconfig.model.NetConfig;
 import org.netconfig.model.IPv4Format;
 
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
 
 public class UIController implements PropertyChangeListener {
 
@@ -22,21 +31,26 @@ public class UIController implements PropertyChangeListener {
 
     // Fields
     @FXML
-    public TextField address;
+    private TextField address;
     @FXML
-    public TextField mask;
+    private TextField mask;
     @FXML
-    public TextField network;
+    private TextField network;
     @FXML
-    public TextField broadcast;
+    private TextField broadcast;
     @FXML
-    public TextField higher;
+    private TextField higher;
     @FXML
-    public TextField lower;
+    private TextField lower;
     @FXML
-    public TextField naa;
+    private TextField naa;
+
+    @FXML
+    private Button toJSON;
 
     private NetConfig model;
+
+    private Stage stage;
 
     public UIController(NetConfig model) {
         this.model = model;
@@ -72,6 +86,30 @@ public class UIController implements PropertyChangeListener {
     @FXML
     public void stop(ActionEvent event) {
         System.exit(0);
+    }
+
+    @FXML
+    public void saveConfig(ActionEvent event) {
+        Stage stage = new Stage();
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(toJSON.getScene().getWindow());
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(stage);
+        if (selectedDirectory != null) {
+            File f = new File(selectedDirectory.getPath() + File.separator +
+                    "NetConfig-save_" + new Date().getTime() + ".json");
+            System.out.println(f.getPath());
+            try {
+                String content = this.model.toJson();
+                content = content.replace("{", "{\n");
+                content = content.replace("}", "}\n");
+                PrintWriter pw = new PrintWriter(f);
+                pw.write(content);
+                pw.close();
+            } catch (IOException e) {
+
+            }
+        }
     }
 
 

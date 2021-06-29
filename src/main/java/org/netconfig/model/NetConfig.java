@@ -1,5 +1,7 @@
 package org.netconfig.model;
 
+import org.json.JSONObject;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -122,5 +124,38 @@ public class NetConfig {
 
     public double getAvailable() {
         return this.available;
+    }
+
+    public String toJson() {
+        JSONObject jaddr = new JSONObject();
+        JSONObject jmask = new JSONObject();
+        JSONObject jbroadcast = new JSONObject();
+        JSONObject jnetwork = new JSONObject();
+        JSONObject jlower = new JSONObject();
+        JSONObject jhigher = new JSONObject();
+
+        addIP(jaddr, this.address);
+        addIP(jmask, this.mask);
+        addIP(jbroadcast, this.broadcast);
+        addIP(jnetwork, this.network);
+        addIP(jhigher, this.higher);
+        addIP(jlower, this.lower);
+
+        JSONObject jobj = new JSONObject();
+        jobj.put("ADDRESS", jaddr);
+        jobj.put("MASK", jmask);
+        jobj.put("BROADCAST", jbroadcast);
+        jobj.put("NETWORK", jnetwork);
+        jobj.put("HIGHER", jhigher);
+        jobj.put("LOWER", jlower);
+        jobj.put("AVAILABLE", String.valueOf((int) this.available));
+
+        return jobj.toString();
+    }
+
+    private void addIP(JSONObject jObj, IPv4Format ip) {
+        jObj.put("BIN", ip.toString(IPv4Format.BASE2));
+        jObj.put("DEC", ip.toString(IPv4Format.BASE10));
+        jObj.put("HEX", ip.toString(IPv4Format.BASE16));
     }
 }
