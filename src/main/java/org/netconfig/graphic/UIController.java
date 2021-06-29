@@ -67,7 +67,6 @@ public class UIController implements PropertyChangeListener {
             this.model.setMask(this.mask.getText(), this.getSelectedMode());
             this.mask.setStyle("-fx-text-inner-color: black;");
         } catch (Exception e) {
-            System.out.println("error" + this.mask.getText());
             this.mask.setStyle("-fx-text-inner-color: red;");
         }
     }
@@ -78,7 +77,6 @@ public class UIController implements PropertyChangeListener {
             this.model.setAddress(this.address.getText(), this.getSelectedMode());
             this.address.setStyle("-fx-text-inner-color: black;");
         } catch (Exception e) {
-            System.out.println("error" + this.address.getText());
             this.address.setStyle("-fx-text-inner-color: red;");
         }
     }
