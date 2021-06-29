@@ -1,0 +1,83 @@
+@startuml
+
+package model {
+    class NetConfig {
+        NetConfigaddress: Address, mask: Mask)
+        getAddress() : Address
+        getMask() : Mask.
+        getNetwork() : Address
+        getBroadcast() : Address
+        getHigher() : Address
+        getLower() : Address
+        setAddress(address : Address)
+        setMask(mask : Mask)
+        toJSON() : String
+    }
+
+    abstract IPv4Format {
+        + static final int BASE2 = 2
+        + static final int BASE10 = 10
+        + static final int BASE16 = 16
+        # addr : UnsignedByte[]
+        # getRegEx(base : int) : String
+        # getSeparator(base : int) : char
+        # checkBase(base : int) : void
+        # isByte(base: int, val: String) : Boolean
+        + toArray(base : int) : String[]
+        + toString(base : int) : String
+    }
+
+   class Address {
+       Address(base : int, address : String)
+       Address(base : int, address : String[])
+   }
+
+   class Mask {
+       Mask(base : int, mask : String)
+       Mask(base : int, mask : String[])
+   }
+
+   class UnsignedByte {
+       + UnsignedByte(value: String, base: int)
+       + toString(base: int)
+   }
+
+    package util {
+        class Convertor {
+            + binToDec(binaryNumber : String) : String
+            + binToHex(binaryNumber : String) : String
+            + decToBin(decimalNumer : int) : String
+            + hexToBin(hexadecimalNumer : int) : String
+            + Convertor()
+        }
+    }
+
+    IPv4Format *-- UnsignedByte
+
+    IPv4Format <|-- Address
+    IPv4Format <|-- Mask
+
+    IPv4Format *-- NetConfig
+    IPv4Format o-- NetConfig
+
+}
+
+package UI {
+    class Controller {
+
+    }
+}
+
+class PropertyChangeSupport {
+    + firePropertyChange(propertyName : String, oldValue : Object, newValue : Object)
+}
+
+interface PropertyChangeListener {
+    + propertyChange(event: PropertyChange)
+}
+
+PropertyChangeSupport <|-- NetConfig
+PropertyChangeListener <|.. Controller
+PropertyChangeSupport o-- PropertyChangeListener
+
+@enduml
