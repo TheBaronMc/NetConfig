@@ -35,14 +35,7 @@ The next picture represents the main frame of the application.
   + `Higher`: Higher available address
   + `Lower`: Lower available address
   + `Number of available address`: isn't that clear enough? :smile:
-+ `Enter` button: Start the computation
++ `toJSON` button: Export the results in a `.json` file
 + `Exit` button: Exit the application
 
 After the computation, you can change the mode to see the result in an other base (`HEX`, `BIN`, `BIN`).
-
-If the ask for computation and there is a mistake in your data, nothing will happened.
-
-If you change the base and there is a mistake in your data, a warning message will appear to tell you that the conversion hasn't been made.
-
-![](img/conversion_error.png)
-
